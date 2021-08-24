@@ -21,7 +21,6 @@ def menu():
     else:
         print('Opção Invalida!!!')
         return menu()
-    
 
 def adicionar():
     contato = str(input('\nDigite o nome do contato:\n'))
@@ -39,16 +38,12 @@ def adicionar():
     time.sleep(1)
     print('Adicionado com sucesso\n')
     return menu()
-    
-
 
 def listar():
     print('\n')
     for i in range (len(lista[0])):
         print('Nome: {}  Número: {} '.format(lista[0][i], lista[1][i]))
-        
-        
-    
+  
     a = False
     while True:
         if not lista[0]:
@@ -62,22 +57,20 @@ def listar():
             a
             
             return menu()
-    
-   
-   
 
 def pesquisar():
     nome = str(input('\nDigite o nome desejado: '))
     time.sleep(1.5)
     for i in range (len(lista[0])):
         if nome == lista[0][i]:
+            
             print('PESQUISA CONCLUÍDA COM SUCESSO\n')
             print('Nome: {}  Número: {}\n '.format(lista[0][i], lista[1][i]))
             return menu()
-        else:
-            print('PESQUISA CONCLUÍDA COM SUCESSO\n')
-            print('Não consta um contato com esse nome!!!\n')
-            return menu()
+    if nome != lista[0]:
+        print('PESQUISA CONCLUÍDA COM SUCESSO\n')
+        print('Não consta um contato com esse nome!!!\n')
+        return menu()
     
     
             
@@ -98,6 +91,10 @@ def excluir():
                 print('Cancelando operação!!!\n')
                 time.sleep(1)
                 return menu()
+    if nome != lista[0]:
+        print('PESQUISA CONCLUÍDA COM SUCESSO\n')
+        print('Não consta um contato com esse nome!!!\n')
+        return menu()
 
 def alterar():
     nome = str(input('\nDigite o nome que deseja alterar: '))    
@@ -116,7 +113,10 @@ def alterar():
                 print('Numero alterado com sucesso!!!\n')
                 time.sleep(1)
                 return menu()
-    
+    if nome != lista[0]:
+        print('PESQUISA CONCLUÍDA COM SUCESSO\n')
+        print('Não consta um contato com esse nome!!!\n')
+        return menu()
     
 
 
