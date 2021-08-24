@@ -30,7 +30,7 @@ def adicionar():
         time.sleep(1)
         return adicionar()
     else:
-        lista[0].append(contato)
+        lista[0].append(contato.strip())
 
     time.sleep(1)
     numero = input('Digite o número do contato:\n')
@@ -60,16 +60,18 @@ def listar():
 
 def pesquisar():
     nome = str(input('\nDigite o nome desejado: '))
+    print('Buscando...')
     time.sleep(1.5)
     for i in range (len(lista[0])):
         if nome == lista[0][i]:
-            
             print('PESQUISA CONCLUÍDA COM SUCESSO\n')
             print('Nome: {}  Número: {}\n '.format(lista[0][i], lista[1][i]))
+            time.sleep(1)
             return menu()
     if nome != lista[0]:
         print('PESQUISA CONCLUÍDA COM SUCESSO\n')
         print('Não consta um contato com esse nome!!!\n')
+        time.sleep(1)
         return menu()
     
     
@@ -94,6 +96,7 @@ def excluir():
     if nome != lista[0]:
         print('PESQUISA CONCLUÍDA COM SUCESSO\n')
         print('Não consta um contato com esse nome!!!\n')
+        time.sleep(1)
         return menu()
 
 def alterar():
@@ -116,6 +119,7 @@ def alterar():
     if nome != lista[0]:
         print('PESQUISA CONCLUÍDA COM SUCESSO\n')
         print('Não consta um contato com esse nome!!!\n')
+        time.sleep(1)
         return menu()
     
 
