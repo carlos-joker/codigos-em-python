@@ -45,10 +45,11 @@ def pesquisar():
     for i in range (len(lista[0])):
         if nome == lista[0][i]:
             print(lista[0][i], lista[1][i])
+            return menu()
+        else:
+            print('Não consta um contato com esse nome!!! ')
+    return menu()
             
-
-        return menu()
-
 def excluir():
     nome = str(input('Digite o nome que deseja remover: '))
     for i in range(len(lista[0])):
