@@ -9,7 +9,6 @@ def collatz(number):
     a = number
     lista = []
     lista.append(a)
-
     while a > 1:
         if a % 2 == 0:
             a = a // 2
