@@ -1,4 +1,5 @@
-import sys,time
+import sys,time,csv
+
 
 lista = [[],[]]
 
@@ -23,24 +24,36 @@ def menu():
         return menu()
 
 def adicionar():
-    contato = str(input('\nDigite o nome do contato:\n'))
-    a = contato in lista[0]
-    if a == True:
-        print('Já possui um contato com esse nome.')
-        time.sleep(1)
-        return adicionar()
-    else:
-        lista[0].append(contato.strip())
+    with open ('lista.csv', mode ='a', newline='', encoding='UTF-8') as cd:
+        writer = csv.DictWriter(cd, fieldnames=['NOME', 'TELEFONE'])
+        contato = str(input('\nDigite o nome do contato:\n'))
+        a = contato in lista[0]
+        if a == True:
+            print('Já possui um contato com esse nome.')
+            time.sleep(1)
+            return adicionar()
+        else:
+            lista[0].append(contato.strip())
+            
+            
 
-    time.sleep(1)
-    numero = input('Digite o número do contato:\n')
-    lista[1].append(numero)
-    time.sleep(1)
-    print('Adicionado com sucesso\n')
-    return menu()
+        time.sleep(1)
+        numero = input('Digite o número do contato:\n')
+        lista[1].append(numero)
+        writer.writerow({'NOME': contato, 'TELEFONE' : numero})
+        cd.close()
+        time.sleep(1)
+        print('Adicionado com sucesso\n')
+        return menu()
 
 def listar():
-    print('\n')
+    with open('lista.csv') as cv:
+        csv_reader = csv.reader(cv, delimiter=',')
+        csv_reader.__next__()
+        for row in csv_reader:
+            print(row[0] + ',' + row[1])
+        return menu()
+''' print('\n')
     for i in range (len(lista[0])):
         print('Nome: {}  Número: {} '.format(lista[0][i], lista[1][i]))
   
@@ -54,9 +67,9 @@ def listar():
         else:
             print('\n')
             time.sleep(1)
-            a
+            a'''
             
-            return menu()
+           
 
 def pesquisar():
     nome = str(input('\nDigite o nome desejado: '))
