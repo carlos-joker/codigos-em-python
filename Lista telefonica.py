@@ -3,10 +3,10 @@ import sys,time,csv
 
 lista = [[],[]]
 
-
 def menu():
-    
+    print('-'*100 + '|')
     a = input('Digite o que deseja fazer : 1- Adicionar 2-listar 3- Pesquisar 4-Excluir 5-Alterar 6-Sair: ')
+    print('-'*100 + '|')
     if a == '1':
         return adicionar()
     elif a == '2':
@@ -24,36 +24,27 @@ def menu():
         return menu()
 
 def adicionar():
-    with open ('lista.csv', mode ='a', newline='', encoding='UTF-8') as cd:
-        writer = csv.DictWriter(cd, fieldnames=['NOME', 'TELEFONE'])
-        contato = str(input('\nDigite o nome do contato:\n'))
-        a = contato in lista[0]
-        if a == True:
-            print('Já possui um contato com esse nome.')
-            time.sleep(1)
-            return adicionar()
-        else:
-            lista[0].append(contato.strip())
-            
-            
+    contato = str(input('\nDigite o nome do contato:\n'))
+    a = contato in lista[0]
+    if a == True:
+        print('Já possui um contato com esse nome.')
+        time.sleep(1)
+        return adicionar()
+    else:
+        lista[0].append(contato.strip())
+        
+        
 
-        time.sleep(1)
-        numero = input('Digite o número do contato:\n')
-        lista[1].append(numero)
-        writer.writerow({'NOME': contato, 'TELEFONE' : numero})
-        cd.close()
-        time.sleep(1)
-        print('Adicionado com sucesso\n')
-        return menu()
+    time.sleep(1)
+    numero = input('Digite o número do contato:\n')
+    lista[1].append(numero)
+    time.sleep(1)
+    print('Adicionado com sucesso\n')
+    return menu()
 
 def listar():
-    with open('lista.csv') as cv:
-        csv_reader = csv.reader(cv, delimiter=',')
-        csv_reader.__next__()
-        for row in csv_reader:
-            print(row[0] + ',' + row[1])
-        return menu()
-''' print('\n')
+    
+    print('\n')
     for i in range (len(lista[0])):
         print('Nome: {}  Número: {} '.format(lista[0][i], lista[1][i]))
   
@@ -67,8 +58,8 @@ def listar():
         else:
             print('\n')
             time.sleep(1)
-            a'''
-            
+            a
+            return menu()
            
 
 def pesquisar():
@@ -118,22 +109,30 @@ def alterar():
         if nome == lista[0][i]:
             opcao = int(input('O que deseja alterar? 1- Nome 2- numero: '))  
             if opcao == 1:
-                nom = str(input('\nDigite o novo nome: '))
-                lista[0][i] = nom
-                print('Nome alterado com sucesso!!!\n')
-                time.sleep(1)
-                return menu()   
+                count = 1
+                while count == 1:
+                    nom = str(input('\nDigite o novo nome: '))
+                    a = nom in lista[0]
+                    if a == True:
+                        print('O nome que você digitou é o mesmo ou ja existe um nome igual na lista')
+                        print('Por favor, digite outro nome!!!')
+                        count = 1
+                    else:
+                        lista[0][i] = nom
+                        print('Nome alterado com sucesso!!!\n')
+                        time.sleep(1)
+                        return menu()   
             elif opcao == 2:
                 num = int(input('\nDigite o novo numero: '))
                 lista[1][i] = num
                 print('Numero alterado com sucesso!!!\n')
                 time.sleep(1)
                 return menu()
-    if nome != lista[0]:
-        print('PESQUISA CONCLUÍDA COM SUCESSO\n')
-        print('Não consta um contato com esse nome!!!\n')
-        time.sleep(1)
-        return menu()
+        elif nome not in lista[0]:
+            print('PESQUISA CONCLUÍDA COM SUCESSO\n')
+            print('Não consta um contato com esse nome!!!\n')
+            time.sleep(1)
+            return menu()
     
 
 
